@@ -4,9 +4,11 @@ class Solution:
         # add each element to hashMap as a key with the index as value
         hashMap = {}
         # iterate over nums
-        for i in range(len(nums)):
+        for i, num in enumerate(nums):
             # if target minus num is in hashMap
             complement = target - nums[i]
-            if  complement in hashMap and i != hashMap[complement]: 
+            if  complement in hashMap: 
                 # return i and hashMap value at target minus num
-                return [i, hashMap[complement]]
+                return [hashMap[complement], i]
+            # add current to hashMap
+            hashMap[num] = i
