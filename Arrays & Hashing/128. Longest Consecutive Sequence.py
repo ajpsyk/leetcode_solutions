@@ -1,4 +1,3 @@
-from heapq import heappush, heappop
 from typing import List
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
