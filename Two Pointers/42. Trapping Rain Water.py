@@ -1,23 +1,32 @@
 from typing import List
 class Solution:
     def trap(self, height: List[int]) -> int:
-        # create max of left or right
+        # initialize left and right pointer
+        left = 0
+        right = len(height) - 1
+        # initlalize left and right max
+        left_max = height[left]
+        right_max = height[right]
+        # total
         total = 0
-        max_left = []
-        max_right = []
-        for left in range(len(height)):
-            right = len(height) - 1 - left
-            if left == 0:
-                max_left.append(height[left])
-                max_right.append(height[right])
-            else:
-                max_left.append(max(max_left[left - 1], height[left - 1]))
-                max_right.append(max(max_right[left - 1], height[right + 1]))
-        # determine water held by subtractin current height from min on left or right
-        for left in range(len(height)):
-            right = len(height) - 1 - left
-            total += max(min(max_left[left], max_right[right]) - height[left], 0)
-        return total
 
-solution = Solution()
-solution.trap([0,1,0,2,1,0,1,3,2,1,2,1])
+        # increment left and right pointer until they overlap
+        while left < right:
+            # if left is smaller
+            if left_max < right_max:
+                # increment left
+                left += 1
+                # find max between height at left and left max
+                left_max = max(left_max, height[left])
+                # add difference to total
+                total += left_max - height[left]
+            # else
+            else:
+                # decrement right
+                right -= 1
+                # update maxRight if height at right is larger
+                right_max = max(right_max, height[right])
+                # add difference to total
+                total += right_max - height[right]
+                
+        return total
