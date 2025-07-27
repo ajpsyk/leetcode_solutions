@@ -21,5 +21,5 @@ class Solution:
             stack.append((curr_index, height))
         # if there is stuff remaining in the stack, iterate over stack and update max area
         for index, height in stack:
-            max_area = max(max_area, height * (len(stack) - index))
+            max_area = max(max_area, height * (len(height) - index))
         return max_area
